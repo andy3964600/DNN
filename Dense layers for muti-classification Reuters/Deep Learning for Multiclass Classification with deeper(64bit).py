@@ -5,12 +5,12 @@ from keras.datasets import reuters
 
 #從reuters資料集中讀取訓練資料，訓練標籤，測試資料，測試標籤
 
-(train_data,train_labels),(test_data,test_labels)=reuters.load_data(num_words=10000)
+(train_data,train_labels),(test_data,test_labels)=reuters.load_data(num_words=5000)
 
 #將函數'sequences'傳入維度為10000的雙層list中。
 import numpy as np
 
-def vectorize_sequences(sequences,dimension=10000):
+def vectorize_sequences(sequences,dimension=5000):
 
 #建立全為0的矩陣，其矩陣的形式為(len(sequences),dimension)
 
