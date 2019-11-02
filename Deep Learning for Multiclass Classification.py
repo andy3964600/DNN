@@ -1,4 +1,3 @@
-
 #從keras.datasets的package中匯入reuters的資料集#從keras.datasets的package中匯入reuters的資料集
 
 from keras.datasets import reuters
@@ -52,13 +51,13 @@ model=models.Sequential()
 
 #輸入層是隱藏層
 
-model.add(layers.Dense(128,
+model.add(layers.Dense(32,
                        activation='relu',
                        input_shape=(10000,)))
 
 #隱藏層
 
-model.add(layers.Dense(128,
+model.add(layers.Dense(32,
                        activation='relu'))
 
 #輸出層
@@ -171,5 +170,4 @@ plt.ylabel('Accuracy')
 plt.legend()
 
 plt.show()
-
 

@@ -1,16 +1,18 @@
+# -*- coding: utf-8 -*-
 
 #################################################
+#此二元分類為將電影評論分類為正評或負評。利用Keras中的IMDB資料庫的資料來當作訓練資料。總共有25000個評論。
 #
 #
 #
 #
-#
-#
+#B
 #
 #
 #
 ##################################################
 #從keras.datasets的package中匯入imdb。
+
 
 from keras.datasets import imdb
 
@@ -59,45 +61,35 @@ y_train=np.asarray(train_labels).astype('float32')
 y_test=np.asarray(train_labels).astype('float32')
 
 from keras import models
-
+from keras import regularizers
 from keras import layers
 
 #使用models的package中的sequential type，建立一個物件讓新增的神經網路層可以進行堆疊。
 
 model=models.Sequential()
 
-#32bit的輸入層是隱藏層
+#輸入層是隱藏層
 
-model.add(layers.Dense(32,
+model.add(layers.Dense(64, 
                        activation='relu',
                        input_shape=(10000,)))
 
-#32bit的隱藏層
+#64位元隱藏層
 
-model.add(layers.Dense(32,
-                       activation='relu'))
+model.add(layers.Dense(64,
+                       activation='relu',
+                       kernel_regularizer=regularizers.l1_l2(l1=0.001,l2=0.001)))
 
-#32bit的輸出層
-
-model.add(layers.Dense(32,
-                       activation='relu'))
+#dropout64位元中的三個神經元
 
 #輸出層
+#輸出層
 
-model.add(layers.Dense(1,
-                       activation='sigmoid'))
+model.add(layers.Dense(1,activation='sigmoid'))
 
 #指定損失函數，並進行compile。
 
 model.compile(optimizer='rmsprop',
-              loss='binary_crossentropy',
-              metrics=['accuracy'])
-
-from keras import optimizers
-
-#調整optimizer的參數lr值
-
-model.compile(optimizer=optimizers.RMSprop(lr=0.001),
               loss='binary_crossentropy',
               metrics=['accuracy'])
 
@@ -116,8 +108,6 @@ y_val=y_train[:10000]
 #從標籤的第10000個開始才是訓練資料的標籤。
 
 partial_y_train=y_train[10000:]
-
-#建立訓練模型。
 
 #呼叫fit()開始訓練(使用partial_x_train輸入資料，partial_y_train標籤，20個訓練週期，一次batch使用512筆資料)，同時傳入validation set的資料即標籤。
 
@@ -208,5 +198,3 @@ plt.ylabel('Accuracy')
 plt.legend()
 
 plt.show()
-
-
